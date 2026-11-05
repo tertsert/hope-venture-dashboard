@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My work at The Hope Venture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --orange:#F26B31; --gold:#EEC584; --sky:#C2DFE3; --blue:#9DB4C0; --teal:#55868C; --brown:#A37A74;
+  --ink:#10262A; --muted:#4A5F64; --line:#D5E0E2; --empty:#EDF2F3; --paper:#FFFFFF;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Open Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-stretch:125%;margin:0;line-height:1.05}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+.notice{background:var(--ink);color:#fff;padding:10px 0;font-size:.92rem}
+.notice code{background:rgba(255,255,255,.14);padding:1px 5px;border-radius:3px}
+
+.hero{background:var(--orange);color:#000;padding:clamp(28px,5vw,56px) 0 clamp(24px,4vw,40px)}
+.hero h1{text-wrap:balance;font-weight:800;font-size:clamp(2.3rem,7.6vw,6.2rem);letter-spacing:-.015em;max-width:15ch;overflow-wrap:break-word}
+.hero .who{font-size:clamp(1rem,1.6vw,1.2rem);margin:18px 0 0;font-weight:600}
+.hero .who a{color:inherit}
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:clamp(22px,3vw,34px)}
+.seg{display:flex;flex-wrap:wrap;gap:0;border:2px solid #000;border-radius:4px;overflow:hidden}
+.seg button{padding:7px 13px;font-weight:600;font-size:.92rem}
+.seg button+button{border-left:2px solid #000}
+.seg button[aria-pressed=true]{background:#000;color:#fff}
+.seg button:focus-visible{outline-offset:-5px;outline-color:#fff;mix-blend-mode:difference}
+.worker{display:none;align-items:center;gap:8px;font-weight:600;font-size:.92rem}
+.worker select{font:inherit;background:transparent;border:2px solid #000;border-radius:4px;padding:6px 8px;color:#000}
+.status{font-size:.88rem;font-weight:600;margin-left:auto}
+.status::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:#000;margin-right:7px}
+.status.bad::before{background:#fff;box-shadow:0 0 0 2px #000}
+
+.chip{display:none;background:var(--sky);padding:10px 0;font-weight:600;font-size:.95rem;position:sticky;top:0;z-index:5}
+.chip button{text-decoration:underline;margin-left:10px;font-weight:600}
+
+section{padding:clamp(34px,5vw,60px) 0 0}
+section h2{font-size:clamp(1.35rem,2.4vw,1.85rem);font-weight:800}
+.sub{color:var(--muted);margin:7px 0 20px;max-width:68ch}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,6vw,76px);align-items:start}
+.two>section{padding-top:0}
+.pair{padding-top:clamp(34px,5vw,60px)}
+
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px clamp(20px,4vw,48px);margin:0}
+.facts div{border-top:3px solid var(--ink);padding-top:9px;min-width:0}
+.facts dt{font-size:.9rem;color:var(--muted);font-weight:600}
+.facts dd{margin:3px 0 0}
+.facts .v{display:block;font:800 clamp(1.35rem,2.5vw,1.9rem)/1.15 var(--display);font-stretch:125%;overflow-wrap:anywhere}
+.facts .d{display:block;font-size:.92rem;color:var(--muted);overflow-wrap:anywhere}
+
+.heat-scroll{overflow-x:auto;padding:3px 3px 6px}
+.heat{--c:11px;display:grid;gap:4px;width:100%;align-items:center}
+.heat .m{font-size:.8rem;color:var(--muted);white-space:nowrap;font-weight:600}
+.heat .w{font-size:.8rem;color:var(--muted);padding-right:6px}
+.cell{display:block;aspect-ratio:1;width:100%;border-radius:3px;background:var(--empty)}
+button.cell:hover{outline:2px solid var(--ink);outline-offset:1px}
+.cell.sel{outline:3px solid var(--ink);outline-offset:1px}
+.l1{background:#FBDCCD}.l2{background:#F8B595}.l3{background:#F26B31}.l4{background:#A83F10}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.84rem;color:var(--muted);margin-top:10px;align-items:center}
+.legend i{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+
+.day{margin-top:24px;border-left:5px solid var(--orange);padding:2px 0 2px 18px}
+.day h3{font-size:1.08rem;font-weight:800}
+.day ul{list-style:none;margin:10px 0 0;padding:0}
+.day li{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:3px 10px;padding:7px 0;border-top:1px solid var(--line)}
+.day .h{font-weight:700}
+.day .meta{display:block;color:var(--muted);font-size:.88rem}
+.day .note{display:block;font-size:.92rem}
+
+.bars{display:grid;gap:13px}
+.bar{display:block;width:100%;text-align:left;border-radius:3px}
+.bar .top{display:flex;justify-content:space-between;gap:12px;font-size:.95rem}
+.bar .name{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.bar .val{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .small{display:block;font-size:.85rem;color:var(--muted);font-weight:400}
+.track{display:block;height:11px;background:var(--empty);border-radius:2px;margin-top:4px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--teal)}
+button.bar:hover .name{text-decoration:underline}
+button.bar[aria-pressed=true] .name{text-decoration:underline;text-decoration-thickness:2px}
+
+.chart{position:relative;height:230px;display:flex;align-items:flex-end;gap:var(--gap,4px);border-bottom:2px solid var(--ink)}
+.col{flex:1 1 0;min-width:0;height:100%;display:flex;align-items:flex-end}
+.col:hover .stack{opacity:.76}
+.stack{width:100%;display:flex;flex-direction:column-reverse;gap:2px;min-height:0;border-radius:2px 2px 0 0;overflow:hidden}
+.stack i{display:block;min-height:0}
+.xlabels{display:flex;gap:var(--gap,4px);margin-top:6px;height:1.3em;overflow:clip}
+.xlabels span{flex:1 1 0;min-width:0;font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:visible}
+.goal{position:absolute;left:0;right:0;border-top:2px dashed var(--ink);pointer-events:none}
+.goal span{position:absolute;right:0;top:-1.55em;font-size:.8rem;font-weight:600;padding:0 4px}
+
+.lunch{background:var(--gold);margin-top:clamp(44px,6vw,76px);padding:clamp(34px,5vw,62px) 0 clamp(38px,5vw,66px)}
+.lunch h2{font-size:clamp(1.9rem,4.8vw,3.6rem)}
+.lunch .sub{color:var(--ink)}
+.lunch .track{background:#F7E2C0}
+.lunch .track i{background:var(--ink)}
+.lunch .small,.lunch .xlabels span{color:var(--ink)}
+.lunch .chart{height:150px}
+.score{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 22px;align-items:center}
+.score .num{font:800 clamp(5rem,13vw,10rem)/.86 var(--display);font-stretch:125%;letter-spacing:-.03em}
+.score .note{grid-column:1/-1;margin:12px 0 0;font-weight:600}
+.stars{display:inline-block;position:relative;line-height:0;white-space:nowrap;vertical-align:-.13em}
+.stars svg{width:var(--s,1em);height:var(--s,1em);display:inline-block}
+.stars .off path{fill:none;stroke:currentColor;stroke-width:1.6}
+.stars .on{position:absolute;top:0;left:0;overflow:hidden;height:100%}
+.stars .on span{display:block;white-space:nowrap}
+.lunch h3{font-size:1.08rem;font-weight:800;margin-bottom:13px}
+.lunch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,5vw,60px);margin-top:clamp(30px,4vw,48px)}
+.reviews{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px clamp(20px,4vw,48px)}
+.reviews blockquote{margin:6px 0 0;font-weight:600;overflow-wrap:anywhere}
+.reviews small{display:block;font-size:.85rem}
+
+footer{padding:24px 0 34px;color:var(--muted);font-size:.88rem}
+.message{padding:60px 0;max-width:62ch}
+.message h2{font-size:1.6rem;margin-bottom:12px}
+#tip{position:fixed;z-index:20;pointer-events:none;display:none;background:var(--ink);color:#fff;font-size:.86rem;padding:5px 9px;border-radius:3px;max-width:260px;white-space:pre-line}
+
+@media (max-width:820px){
+  .heat{--c:20px}
+  .two,.lunch-grid{grid-template-columns:minmax(0,1fr)}
+  .facts,.reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .status{margin-left:0;width:100%}
+}
+@media (max-width:480px){
+  .facts,.reviews{grid-template-columns:minmax(0,1fr)}
+  .chart{height:190px}
+}
+</style>
+</head>
+<body>
+<div id="notice" class="notice" hidden><div class="wrap">Showing sample data. Add your sheet ID at <code>sheetId</code> in this file to show your real hours.</div></div>
+<header class="hero">
+  <div class="wrap">
+    <h1 id="headline">Loading your hours</h1>
+    <p class="who" id="who"></p>
+    <div class="controls">
+      <div class="seg" id="ranges" role="group" aria-label="Date range">
+        <button data-range="all" aria-pressed="true">All time</button>
+        <button data-range="year" aria-pressed="false">This year</button>
+        <button data-range="90" aria-pressed="false">90 days</button>
+        <button data-range="30" aria-pressed="false">30 days</button>
+      </div>
+      <label class="worker" id="workerWrap">Person <select id="worker"></select></label>
+      <div class="status" id="status" role="status">Connecting to your sheet</div>
+    </div>
+  </div>
+</header>
+<div class="chip" id="chip"><div class="wrap"><span id="chipText"></span><button data-clear>Show all categories</button></div></div>
+<main id="app"></main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+/* ---------- SETTINGS: this is the only part you need to edit ---------- */
+const CONFIG = {
+  sheetId: "1yuJhsFiyhT1FdQ7yWcxMZIgVQvTPuPs4ubPxW5MVonY", // The long ID in your sheet's URL, between /d/ and /edit
+  tabName: "",            // Tab name, such as "Timesheet". Leave blank to use the first tab
+  worker: "Michael",      // Whose hours to show first, from the Name column
+  refreshSeconds: 60,     // How often to check the sheet for changes
+  weeklyHoursLine: 40,    // The dashed line on the week-by-week chart
+  countLunchHours: true   // Set to false to leave lunch out of your hours worked
+};
+/* ---------------------------------------------------------------------- */
+
+const params = new URLSearchParams(location.search);
+const SHEET_ID = params.get("sheet") || CONFIG.sheetId;
+const DEMO = params.has("demo") || !SHEET_ID;
+const PALETTE = ["#F26B31","#55868C","#D9A441","#23545B","#A37A74","#9DB4C0","#7D4A35","#EEC584"];
+const OTHER_COLOR = "#B8C7CC"; // Categories past the eighth share this color
+const DAY = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const state = {rows:[], csv:null, range:"all", category:null, worker:null, day:null, colors:{}, lastOk:null};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = (n,d=1) => Number(n).toLocaleString("en-US",{maximumFractionDigits:d});
+const hrs = n => `${num(n)} ${Math.abs(n-1)<.001?"hour":"hours"}`;
+const pad = n => String(n).padStart(2,"0");
+const keyOf = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const fromKey = k => {const [y,m,d]=k.split("-").map(Number); return new Date(y,m-1,d)};
+const addDays = (d,n) => new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const monday = d => addDays(d,-((d.getDay()+6)%7));
+const nice = (k,year=true) => {const d=fromKey(k); return `${MON[d.getMonth()]} ${d.getDate()}${year?`, ${d.getFullYear()}`:""}`};
+const sum = (a,f) => a.reduce((t,x)=>t+f(x),0);
+const group = (a,f) => {const m=new Map(); for(const x of a){const k=f(x); if(!m.has(k))m.set(k,[]); m.get(k).push(x)} return m};
+const isLunch = r => /\blunch\b/i.test(r.task);
+
+/* ---------- Reading the sheet ---------- */
+function parseCSV(text){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){f+='"';i++} else q=false } else f+=c }
+    else if(c==='"') q=true;
+    else if(c===","){row.push(f);f=""}
+    else if(c==="\n"){row.push(f);rows.push(row);row=[];f=""}
+    else if(c!=="\r") f+=c;
+  }
+  if(f||row.length){row.push(f);rows.push(row)}
+  return rows;
+}
+function parseDate(s){
+  s=(s||"").trim(); let m,y,mo,d;
+  if((m=s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/))){y=+m[1];mo=+m[2];d=+m[3]}
+  else if((m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4}|\d{2})/))){mo=+m[1];d=+m[2];y=+m[3];if(y<100)y+=2000}
+  else return null;
+  const t=new Date(y,mo-1,d);
+  return t.getMonth()===mo-1&&t.getDate()===d ? keyOf(t) : null;
+}
+function parseHours(s){
+  s=(s||"").trim(); if(!s) return NaN;
+  const t=s.match(/^(\d+):(\d{2})/); if(t) return +t[1]+ +t[2]/60;
+  const n=s.match(/-?\d*\.?\d+/); return n?+n[0]:NaN;
+}
+/* Stars: every ★ or ⭐ is a filled star and every ☆ or ✩ is an empty one. */
+function parseStars(notes){
+  const on=(notes.match(/[★⭐]/gu)||[]).length, off=(notes.match(/[☆✩]/gu)||[]).length;
+  if(!on&&!off) return null;
+  return off ? on*5/(on+off) : Math.min(on,5);
+}
+const stripStars = s => s.replace(/[★☆⭐✩\uFE0F]/gu,"").replace(/\s+/g," ").trim();
+function toRows(table){
+  const out=[]; let lastDate=null, lastName="";
+  for(const r of table){
+    if(/^\s*date\s*$/i.test(r[0]||"")){lastDate=null; continue}
+    const date=parseDate(r[0]); if(date){lastDate=date; lastName=""}
+    if(!lastDate) continue;
+    const hours=parseHours(r[1]), task=(r[2]||"").trim(), notes=(r[5]||"").trim(), stars=parseStars(notes);
+    if(!(hours>0)&&stars===null) continue;
+    const name=(r[6]||"").trim()||lastName; lastName=name;
+    out.push({date:lastDate,hours:hours>0?hours:0,task:task||"Untitled task",category:(r[3]||"").trim()||"No category",
+      campaign:(r[4]||"").trim(),notes,stars,review:stripStars(notes),name});
+  }
+  return out;
+}
+function sheetUrl(){
+  const u=new URL(`https://docs.google.com/spreadsheets/d/${encodeURIComponent(SHEET_ID)}/gviz/tq`);
+  u.searchParams.set("tqx","out:csv"); u.searchParams.set("headers","1");
+  if(CONFIG.tabName) u.searchParams.set("sheet",CONFIG.tabName);
+  u.searchParams.set("_",Date.now());
+  return u.toString();
+}
+async function load(){
+  try{
+    let text;
+    if(DEMO) text=demoCSV();
+    else{
+      const res=await fetch(sheetUrl(),{cache:"no-store"});
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      text=await res.text();
+      if(/^\s*</.test(text)) throw new Error("not csv");
+    }
+    state.lastOk=new Date();
+    if(text!==state.csv){ state.csv=text; state.rows=toRows(parseCSV(text)); setup(); render() }
+    setStatus(`${DEMO?"Sample data":"Live"}. Updated ${state.lastOk.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}`);
+  }catch(e){
+    if(state.rows.length) setStatus(`Couldn't refresh. Showing data from ${state.lastOk.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}`,true);
+    else{
+      setStatus("Not connected",true);
+      $("headline").textContent="Your sheet didn't load";
+      $("who").textContent="";
+      $("app").innerHTML=`<div class="wrap message"><h2>Check the sheet's sharing</h2><p>Open the sheet, choose Share, and set General access to "Anyone with the link" as Viewer. Then confirm that <code>sheetId</code> in this file matches the ID in the sheet's URL, and reload this page.</p></div>`;
+    }
+  }
+}
+function setStatus(t,bad=false){const s=$("status"); s.textContent=t; s.classList.toggle("bad",bad)}
+
+/* ---------- Filters ---------- */
+function setup(){
+  const names=[...new Set(state.rows.map(r=>r.name).filter(Boolean))].sort();
+  const w=$("worker"), wanted=(CONFIG.worker||"").toLowerCase();
+  if(state.worker===null){
+    const hit=names.find(n=>n.toLowerCase()===wanted);
+    state.worker = hit || (names.length===1?names[0]:"");
+  }
+  if(state.worker && !names.includes(state.worker)) state.worker="";
+  w.innerHTML=`<option value="">Everyone</option>`+names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join("");
+  w.value=state.worker;
+  $("workerWrap").style.display=names.length>1?"flex":"none";
+  const totals=[...group(workRows(state.rows),r=>r.category)].map(([k,v])=>[k,sum(v,r=>r.hours)]).sort((a,b)=>b[1]-a[1]);
+  state.colors={}; totals.forEach(([k],i)=>state.colors[k]=PALETTE[i]||OTHER_COLOR);
+}
+const workRows = rows => CONFIG.countLunchHours ? rows : rows.filter(r=>!isLunch(r));
+function scope(){
+  let rows=state.rows.filter(r=>!state.worker||r.name===state.worker);
+  const now=new Date();
+  if(state.range==="year") rows=rows.filter(r=>r.date.startsWith(String(now.getFullYear())));
+  if(state.range==="90"||state.range==="30"){const cut=keyOf(addDays(now,-(+state.range))); rows=rows.filter(r=>r.date>=cut)}
+  return rows;
+}
+
+/* ---------- Small drawing helpers ---------- */
+const STAR=`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 6.2 6.8.8-5 4.6 1.3 6.7-6-3.3-6 3.3 1.3-6.7-5-4.6 6.8-.8z"/></svg>`;
+function stars(v,size="1em"){
+  const row=STAR.repeat(5), pct=Math.max(0,Math.min(100,v/5*100));
+  return `<span class="stars" style="--s:${size}" role="img" aria-label="${num(v)} out of 5 stars"><span class="off">${row}</span><span class="on" style="width:${pct}%"><span style="width:calc(var(--s)*5)">${row}</span></span></span>`;
+}
+function bars(items,{fmt=hrs,attr}={}){
+  const max=Math.max(...items.map(i=>i.value),.0001);
+  return `<div class="bars">`+items.map(i=>{
+    const a=attr?attr(i):"", tag=attr?"button":"div";
+    return `<${tag} class="bar" ${a}><span class="top"><span class="name">${esc(i.label)}${i.small?`<span class="small">${esc(i.small)}</span>`:""}</span><span class="val">${esc(fmt(i.value))}</span></span><span class="track"><i style="width:${i.value/max*100}%;${i.color?`background:${i.color}`:""}"></i></span></${tag}>`;
+  }).join("")+`</div>`;
+}
+function columns(items,{line,lineLabel,label,scaleMax}={}){
+  const max=Math.max(scaleMax||0,line||0,...items.map(i=>sum(i.segs,s=>s.v)),.0001);
+  const gap=items.length>40?"1px":items.length>20?"2px":"5px";
+  const cols=items.map(i=>{
+    const t=sum(i.segs,s=>s.v);
+    return `<div class="col" data-tip="${esc(i.tip)}"><div class="stack" style="height:${t/max*100}%">${i.segs.map(s=>`<i style="flex:${s.v||0} 0 0;background:${s.color||"var(--teal)"}"></i>`).join("")}</div></div>`;
+  }).join("");
+  const goal=line?`<div class="goal" style="bottom:${line/max*100}%"><span>${esc(lineLabel)}</span></div>`:"";
+  return `<div style="--gap:${gap}"><div class="chart" role="img" aria-label="${esc(label||"")}">${goal}${cols}</div><div class="xlabels" aria-hidden="true">${items.map((i,n)=>`<span>${items.length>12&&n>=items.length-Math.ceil(items.length*.07)?"":esc(i.x||"")}</span>`).join("")}</div></div>`;
+}
+
+/* ---------- Page ---------- */
+function render(){
+  const scoped=scope();
+  const rows=workRows(scoped).filter(r=>!state.category||r.category===state.category);
+  const who=state.worker||"Everyone";
+  document.title=`${who==="Everyone"?"Our":who+"'s"} work at The Hope Venture`;
+  document.querySelectorAll("[data-range]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.range===state.range)));
+  $("chip").style.display=state.category?"block":"none";
+  $("chipText").textContent=state.category?`Showing only ${state.category}`:"";
+  $("notice").hidden=!DEMO;
+
+  const lunchRated=scoped.filter(r=>r.stars!==null);
+  if(!rows.length){
+    $("headline").textContent=state.rows.length?"No hours in this range":"No hours found yet";
+    $("who").textContent="";
+    $("app").innerHTML=`<div class="wrap message"><h2>${state.rows.length?"Try a wider date range":"Check the sheet's columns"}</h2><p>${state.rows.length?"Choose All time above to see every logged day.":"This page reads the date from column A and hours from column B. Add a row with both, and it will appear here within a minute."}</p></div>`;
+    return;
+  }
+  const total=sum(rows,r=>r.hours), keys=rows.map(r=>r.date).sort(), first=keys[0], last=keys[keys.length-1];
+  const bigTotal=total>=100?num(total,0):num(total);
+  $("headline").textContent = state.category ? `${bigTotal} hours of ${state.category}` : `${bigTotal} hours of helping lives find hope`;
+  const avgLunch=lunchRated.length?sum(lunchRated,r=>r.stars)/lunchRated.length:null;
+  $("who").innerHTML=`${esc(who)} at The Hope Venture, ${nice(first)} to ${nice(last)}.`+(avgLunch!==null?` <a href="#lunch">Average lunch: ${num(avgLunch)} out of 5.</a>`:"");
+
+  const heatScroll=document.querySelector(".heat-scroll")?.scrollLeft;
+  $("app").innerHTML=`<div class="wrap">
+    <section aria-labelledby="h-facts"><h2 id="h-facts" style="margin-bottom:20px">The highlights</h2>${facts(rows)}</section>
+    ${calendar(rows)}
+    ${weekly(rows)}
+    <div class="two pair">
+      <section aria-labelledby="h-cat"><h2 id="h-cat">Where the hours went</h2><p class="sub">Select a category to filter the whole page.</p>${categories(workRows(scoped))}</section>
+      <section aria-labelledby="h-mix"><h2 id="h-mix">How the work changed</h2><p class="sub">Hours each month, split by category.</p>${monthly(rows)}</section>
+    </div>
+    <div class="two pair">
+      <section aria-labelledby="h-camp"><h2 id="h-camp">Campaigns</h2>${campaigns(rows)}</section>
+      <section aria-labelledby="h-task"><h2 id="h-task">Biggest tasks</h2><p class="sub">Task titles with the most total hours.</p>${tasks(rows)}</section>
+    </div>
+    <section aria-labelledby="h-week"><h2 id="h-week">A typical week</h2><p class="sub">Average hours on the days you worked, and what took the most time.</p>${weekdays(rows)}</section>
+  </div>
+  ${lunch(scoped)}
+  <footer class="wrap">${DEMO?"Sample data.":"Pulled from the timesheet."} Checks for changes every ${CONFIG.refreshSeconds} seconds.</footer>`;
+  const hs=document.querySelector(".heat-scroll");
+  if(hs) hs.scrollLeft = heatScroll ?? hs.scrollWidth;
+}
+
+function dayTotals(rows){return [...group(rows,r=>r.date)].map(([date,v])=>({date,hours:sum(v,r=>r.hours),rows:v}))}
+function weekTotals(rows){
+  const m=new Map(); for(const r of rows){const k=keyOf(monday(fromKey(r.date))); m.set(k,(m.get(k)||0)+r.hours)}
+  return m;
+}
+function streak(rows){
+  const set=new Set(rows.filter(r=>r.hours>0).map(r=>r.date)); if(!set.size) return {n:0};
+  const ks=[...set].sort(); let best={n:1,end:ks[0]}, n=1;
+  for(let i=1;i<ks.length;i++){
+    let d=addDays(fromKey(ks[i-1]),1);
+    while((d.getDay()===0||d.getDay()===6)&&!set.has(keyOf(d))) d=addDays(d,1);
+    n = keyOf(d)===ks[i] ? n+1 : 1;
+    if(n>best.n) best={n,end:ks[i]};
+  }
+  return best;
+}
+function facts(rows){
+  const days=dayTotals(rows), busiest=days.reduce((a,b)=>b.hours>a.hours?b:a);
+  const weeks=[...weekTotals(rows)], topWeek=weeks.reduce((a,b)=>b[1]>a[1]?b:a);
+  const long=rows.reduce((a,b)=>b.hours>a.hours?b:a);
+  const counts=[...group(rows.filter(r=>!isLunch(r)),r=>r.task.toLowerCase())].map(([,v])=>v).sort((a,b)=>b.length-a.length)[0];
+  const st=streak(rows);
+  const f=[
+    ["Typical day",`${num(sum(rows,r=>r.hours)/days.length)} hours`,`${num(rows.length/days.length)} tasks a day across ${num(days.length,0)} days`],
+    ["Busiest day",hrs(busiest.hours),nice(busiest.date)],
+    ["Busiest week",hrs(topWeek[1]),`Week of ${nice(topWeek[0])}`],
+    ["Longest single task",hrs(long.hours),`${long.task}, ${nice(long.date)}`],
+    ["Most repeated task",counts?`${num(counts.length,0)} ${counts.length===1?"time":"times"}`:"None yet",counts?counts[0].task:"Only lunch logged so far"],
+    ["Longest run of workdays",`${num(st.n,0)} ${st.n===1?"day":"days"}`,st.end?`Ending ${nice(st.end)}. Weekends don't break a run.`:""]
+  ];
+  return `<dl class="facts">`+f.map(([a,b,c])=>`<div><dt>${esc(a)}</dt><dd><span class="v">${esc(b)}</span><span class="d">${esc(c)}</span></dd></div>`).join("")+`</dl>`;
+}
+function level(h){return h<=0?"":h<4?"l1":h<6?"l2":h<8?"l3":"l4"}
+function calendar(rows){
+  const days=dayTotals(rows), map=new Map(days.map(d=>[d.date,d])), keys=days.map(d=>d.date).sort();
+  if(!map.has(state.day)) state.day=keys[keys.length-1];
+  const weekend=keys.some(k=>[0,6].includes(fromKey(k).getDay()));
+  const order=weekend?[1,2,3,4,5,6,0]:[1,2,3,4,5];
+  const start=monday(fromKey(keys[0])), end=fromKey(keys[keys.length-1]);
+  const nWeeks=Math.round((monday(end)-start)/6048e5)+1;
+  let html="", prev=-1, labelEnd=0;
+  order.forEach((d,i)=>{html+=`<span class="w" style="grid-column:1;grid-row:${i+2}">${DAY[d].slice(0,3)}</span>`});
+  for(let w=0;w<nWeeks;w++){
+    const wk=addDays(start,w*7);
+    if(wk.getMonth()!==prev && w>=labelEnd && (w<nWeeks-2||nWeeks<4)){html+=`<span class="m" style="grid-column:${w+2};grid-row:1">${MON[wk.getMonth()]}${wk.getMonth()===0||w===0?` ${wk.getFullYear()}`:""}</span>`; prev=wk.getMonth(); labelEnd=w+(w===0?3:2)}
+    order.forEach((d,i)=>{
+      const offset=(d+6)%7, day=addDays(wk,offset), k=keyOf(day), rec=map.get(k), pos=`style="grid-column:${w+2};grid-row:${i+2}"`;
+      if(rec) html+=`<button class="cell ${level(rec.hours)} ${state.day===k?"sel":""}" ${pos} data-day="${k}" data-tip="${esc(`${DAY[day.getDay()]}, ${nice(k)}\n${hrs(rec.hours)}`)}" aria-label="${esc(`${nice(k)}, ${hrs(rec.hours)}`)}"></button>`;
+      else html+=`<span class="cell" ${pos}></span>`;
+    });
+  }
+  const sel=map.get(state.day);
+  const list=sel.rows.map(r=>`<li><span class="h">${num(r.hours,2)} hr</span><span><b>${esc(r.task)}</b><span class="meta">${esc(r.category)}${r.campaign?`, ${esc(r.campaign)}`:""}</span>${r.review||r.stars!==null?`<span class="note">${r.stars!==null?stars(r.stars)+" ":""}${esc(r.review)}</span>`:""}</span></li>`).join("");
+  const key=[["l1","Under 4"],["l2","4 to 6"],["l3","6 to 8"],["l4","8 or more"]].map(([c,t])=>`<span><i class="${c}"></i>${t}</span>`).join("");
+  return `<section aria-labelledby="h-cal"><h2 id="h-cal">Every day so far</h2><p class="sub">Darker days have more hours. Select a day to see what you worked on.</p>
+    <div class="heat-scroll"><div class="heat" style="grid-template-columns:2.6em repeat(${nWeeks},minmax(var(--c),1fr));min-width:calc(2.6em + ${nWeeks}*(var(--c) + 4px));max-width:calc(2.6em + ${nWeeks}*48px)">${html}</div></div>
+    <div class="legend"><span>Hours:</span>${key}</div>
+    <div class="day" aria-live="polite"><h3>${DAY[fromKey(state.day).getDay()]}, ${nice(state.day)}: ${esc(hrs(sel.hours))}</h3><ul>${list}</ul></div></section>`;
+}
+function weekly(rows){
+  const m=weekTotals(rows), ks=[...m.keys()].sort(), items=[]; let prev=-1, seen=0;
+  const span=(fromKey(ks[ks.length-1])-fromKey(ks[0]))/6048e5, step=span>52?3:span>26?2:1;
+  for(let d=fromKey(ks[0]); keyOf(d)<=ks[ks.length-1]; d=addDays(d,7)){
+    const k=keyOf(d), v=m.get(k)||0, mo=d.getMonth();
+    let x=""; if(mo!==prev){if(seen%step===0)x=MON[mo]; seen++}
+    items.push({segs:[{v}],tip:`Week of ${nice(k)}\n${hrs(v)}`,x}); prev=mo;
+  }
+  const vals=[...m.values()], avg=sum(vals,v=>v)/vals.length;
+  const showLine=!state.category;
+  return `<section aria-labelledby="h-wk"><h2 id="h-wk">Week by week</h2><p class="sub">You average ${num(avg)} hours in the weeks you logged time.</p>${columns(items,{line:showLine?CONFIG.weeklyHoursLine:0,lineLabel:`${CONFIG.weeklyHoursLine} hours`,label:`Hours per week, averaging ${num(avg)}`})}</section>`;
+}
+function categories(rows){
+  const items=[...group(rows,r=>r.category)].map(([label,v])=>({label,value:sum(v,r=>r.hours),color:state.colors[label]})).sort((a,b)=>b.value-a.value);
+  const t=sum(items,i=>i.value);
+  return bars(items,{fmt:v=>`${num(v,0)} hr, ${num(v/t*100,0)}%`,attr:i=>`data-cat="${esc(i.label)}" aria-pressed="${state.category===i.label}"`});
+}
+function monthly(rows){
+  const m=group(rows,r=>r.date.slice(0,7)), ks=[...m.keys()].sort(), items=[];
+  const [y0,m0]=ks[0].split("-").map(Number), [y1,m1]=ks[ks.length-1].split("-").map(Number);
+  const count=(y1-y0)*12+m1-m0+1, every=count>14?3:count>8?2:1;
+  for(let i=0;i<count;i++){
+    const d=new Date(y0,m0-1+i,1), k=`${d.getFullYear()}-${pad(d.getMonth()+1)}`, v=m.get(k)||[];
+    const cats=[...group(v,r=>r.category)].map(([c,x])=>({c,v:sum(x,r=>r.hours)})).sort((a,b)=>b.v-a.v);
+    const tip=`${MON[d.getMonth()]} ${d.getFullYear()}: ${hrs(sum(v,r=>r.hours))}`+cats.slice(0,4).map(c=>`\n${c.c}: ${num(c.v)}`).join("");
+    items.push({segs:cats.map(c=>({v:c.v,color:state.colors[c.c]})),tip,x:i%every===0?MON[d.getMonth()]:""});
+  }
+  const peak=Math.max(...items.map(i=>sum(i.segs,s=>s.v)));
+  const names=[...new Set(rows.map(r=>r.category))].sort((a,b)=>Object.keys(state.colors).indexOf(a)-Object.keys(state.colors).indexOf(b));
+  return columns(items,{line:peak,lineLabel:`${num(peak,0)} hours`,label:"Hours per month by category."})+(names.length>1?`<div class="legend">${names.map(n=>`<span><i style="background:${state.colors[n]}"></i>${esc(n)}</span>`).join("")}</div>`:"");
+}
+function campaigns(rows){
+  const tagged=rows.filter(r=>r.campaign), untagged=sum(rows.filter(r=>!r.campaign),r=>r.hours);
+  if(!tagged.length) return `<p class="sub">No campaigns are tagged for these hours.</p>`;
+  const items=[...group(tagged,r=>r.campaign)].map(([label,v])=>({label,value:sum(v,r=>r.hours),small:`${num(v.length,0)} ${v.length===1?"task":"tasks"}`})).sort((a,b)=>b.value-a.value);
+  return `<p class="sub">${num(items.length,0)} ${items.length===1?"campaign":"campaigns"}. ${hrs(untagged)} had no campaign.</p>`+bars(items.slice(0,8));
+}
+function tasks(rows){
+  const m=new Map();
+  for(const r of rows){const k=r.task.toLowerCase(); const x=m.get(k)||{label:r.task,value:0,n:0}; x.value+=r.hours;x.n++;m.set(k,x)}
+  return bars([...m.values()].map(x=>({...x,small:`${num(x.n,0)} ${x.n===1?"time":"times"}`})).sort((a,b)=>b.value-a.value).slice(0,8));
+}
+function weekdays(rows){
+  const byDay=group(rows,r=>fromKey(r.date).getDay());
+  const items=[1,2,3,4,5,6,0].filter(d=>byDay.has(d)).map(d=>{
+    const v=byDay.get(d), days=new Set(v.map(r=>r.date)).size;
+    const cats=[...group(v,r=>r.category)].map(([c,x])=>[c,sum(x,r=>r.hours)]).sort((a,b)=>b[1]-a[1]);
+    return {label:DAY[d],value:sum(v,r=>r.hours)/days,small:`Mostly ${cats[0][0]}`,color:state.colors[cats[0][0]]};
+  });
+  return bars(items,{fmt:v=>`${num(v)} hr`});
+}
+function lunch(rows){
+  const rated=rows.filter(r=>r.stars!==null);
+  if(!rated.length) return `<section class="lunch" id="lunch"><div class="wrap"><h2>The lunch report</h2><p class="sub">No rated lunches in this range. Add stars like ★★★☆☆ to the Notes column and they'll be counted here.</p></div></section>`;
+  const avg=sum(rated,r=>r.stars)/rated.length;
+  const lunchHours=sum(rows.filter(isLunch),r=>r.hours);
+  const dist=[5,4,3,2,1,0].map(n=>({n,value:rated.filter(r=>Math.round(r.stars)===n).length})).filter(d=>d.n>0||d.value>0)
+    .map(d=>({label:`${d.n} ${d.n===1?"star":"stars"}`,value:d.value}));
+  const byDay=group(rated,r=>fromKey(r.date).getDay());
+  const dayItems=[1,2,3,4,5,6,0].filter(d=>byDay.has(d)).map(d=>({d,label:DAY[d],value:sum(byDay.get(d),r=>r.stars)/byDay.get(d).length,small:`${byDay.get(d).length} rated`}));
+  const eligible=dayItems.filter(i=>byDay.get(i.d).length>=2);
+  const bestDay=eligible.length>1?eligible.reduce((a,b)=>b.value>a.value?b:a):null;
+  const m=group(rated,r=>r.date.slice(0,7)), ks=[...m.keys()].sort(), mItems=[];
+  const [y0,m0]=ks[0].split("-").map(Number),[y1,m1]=ks[ks.length-1].split("-").map(Number), count=(y1-y0)*12+m1-m0+1, every=count>14?3:count>8?2:1;
+  for(let i=0;i<count;i++){
+    const d=new Date(y0,m0-1+i,1), k=`${d.getFullYear()}-${pad(d.getMonth()+1)}`, v=m.get(k);
+    const a=v?sum(v,r=>r.stars)/v.length:0;
+    mItems.push({segs:[{v:a,color:"var(--ink)"}],tip:v?`${MON[d.getMonth()]} ${d.getFullYear()}: ${num(a,2)} stars from ${v.length} lunches`:`${MON[d.getMonth()]} ${d.getFullYear()}: no rated lunches`,x:i%every===0?MON[d.getMonth()]:""});
+  }
+  const dayHours=new Map(dayTotals(workRows(state.rows.filter(r=>!state.worker||r.name===state.worker))).map(d=>[d.date,d.hours]));
+  const good=rated.filter(r=>r.stars>=4).map(r=>dayHours.get(r.date)||0), rest=rated.filter(r=>r.stars<4).map(r=>dayHours.get(r.date)||0);
+  const gAvg=good.length?sum(good,x=>x)/good.length:0, rAvg=rest.length?sum(rest,x=>x)/rest.length:0;
+  const compare=good.length>=3&&rest.length>=3&&num(gAvg)!==num(rAvg)?` Days with a 4 or 5 star lunch averaged ${num(gAvg)} hours. Other days averaged ${num(rAvg)}.`:"";
+  const reviews=rated.filter(r=>r.review).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);
+  return `<section class="lunch" id="lunch"><div class="wrap">
+    <h2>The lunch report</h2>
+    <p class="sub">Every star rating found in your notes.</p>
+    <div class="score"><div class="num">${num(avg,2)}</div><div>${stars(avg,"clamp(2.2rem,6.5vw,5rem)")}</div>
+      <p class="note">Average of ${num(rated.length,0)} rated ${rated.length===1?"lunch":"lunches"}${lunchHours?`, across ${hrs(lunchHours)} of lunch breaks`:""}.${bestDay?` ${bestDay.label}s score best.`:""}${compare}</p></div>
+    <div class="lunch-grid">
+      <div><h3>All the ratings</h3>${bars(dist,{fmt:v=>num(v,0)})}</div>
+      <div><h3>By day of the week</h3>${bars(dayItems,{fmt:v=>num(v,2)})}</div>
+      <div><h3>Average by month</h3>${columns(mItems,{scaleMax:5,line:5,lineLabel:"5 stars",label:"Average lunch rating by month, on a scale of 0 to 5"})}</div>
+    </div>
+    ${reviews.length?`<div style="margin-top:clamp(30px,4vw,48px)"><h3>Latest reviews</h3><ul class="reviews">${reviews.map(r=>`<li>${stars(r.stars,"1.05em")}<blockquote>${esc(r.review)}</blockquote><small>${nice(r.date)}</small></li>`).join("")}</ul></div>`:""}
+  </div></section>`;
+}
+
+/* ---------- Interaction ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-range],[data-cat],[data-day],[data-clear]"); if(!t) return;
+  if(t.dataset.range){state.range=t.dataset.range; state.day=null}
+  else if(t.dataset.cat!==undefined) state.category=state.category===t.dataset.cat?null:t.dataset.cat;
+  else if(t.dataset.day) state.day=t.dataset.day;
+  else state.category=null;
+  const y=window.scrollY; hideTip(); render(); window.scrollTo({top:y,behavior:"instant"});
+  const again=t.dataset.day?document.querySelector(`[data-day="${t.dataset.day}"]`):t.dataset.cat!==undefined?[...document.querySelectorAll("[data-cat]")].find(b=>b.dataset.cat===t.dataset.cat):null;
+  if(again) again.focus({preventScroll:true});
+});
+$("worker").addEventListener("change",e=>{state.worker=e.target.value; state.day=null; setup(); render()});
+const tip=$("tip");
+function hideTip(){tip.style.display="none"}
+function showTip(el,x,y){
+  tip.textContent=el.dataset.tip; tip.style.display="block";
+  const r=tip.getBoundingClientRect();
+  tip.style.left=Math.max(6,Math.min(innerWidth-r.width-6,x-r.width/2))+"px";
+  tip.style.top=(y-r.height-12<4?y+16:y-r.height-12)+"px";
+}
+document.addEventListener("pointermove",e=>{const el=e.target.closest?.("[data-tip]"); el?showTip(el,e.clientX,e.clientY):hideTip()});
+document.addEventListener("focusin",e=>{const el=e.target.closest?.("[data-tip]"); if(el&&el.matches(":focus-visible")){const r=el.getBoundingClientRect(); showTip(el,r.left+r.width/2,r.top)}});
+document.addEventListener("focusout",hideTip);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden) load()});
+
+/* ---------- Sample data, used until a sheet ID is added ---------- */
+function demoCSV(){
+  let seed=20260527; const rnd=()=>{seed=(seed+0x6D2B79F5)|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return((t^t>>>14)>>>0)/4294967296};
+  const pick=a=>a[Math.floor(rnd()*a.length)];
+  const work=[["Flyer design","Graphic Design","Goat Project"],["Sticker and postcard design","Graphic Design","Run for Hope"],["Event logo work","Graphic Design","Run for Hope"],["Pastor cards layout","Graphic Design","Backpack Project"],["Welcome packet redesign","Graphic Design","Student Sponsorship"],["Story video edit","Video","Night for Hope"],["Recap video edit","Video","Kenya Camp"],["Interview shoot","Video","Student Sponsorship"],["Event photos","Photo","Night for Hope"],["Photo library cleanup","Photo",""],["Website updates","Web",""],["Landing page build","Web","Run for Hope"],["Social posts","Social","Backpack Project"],["Email graphics","Social","Night for Hope"]];
+  const quips=["yummy!!","solid leftovers","tacos, no notes","sad desk salad","great soup","too much hot sauce","best sandwich in months","forgot to pack anything","pizza with the team","pretty good burrito",""];
+  const out=["Date,Hours,Tasks,Category,Campaign,Notes,Name,Total Day,Total Week"];
+  const end=new Date();
+  for(let d=new Date(2025,7,4); d<=end; d=addDays(d,1)){
+    if([0,6].includes(d.getDay())||rnd()<.05) continue;
+    const label=`${DAY[d.getDay()]} // ${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    let left=5.5+rnd()*2.5;
+    const r=rnd(), n=r<.05?1:r<.15?2:r<.45?3:r<.8?4:5, q=pick(quips);
+    out.push(`${label},0.5,Lunch,Team Time,,"${q} ${"★".repeat(n)}${"☆".repeat(5-n)}",Michael,,`);
+    if(d.getDay()===1){out.push(`${label},1,Staff meeting,Team Time,,,Michael,,`); left-=1}
+    while(left>.2){const t=pick(work), h=Math.min(left,Math.round((.5+rnd()*3)*4)/4); out.push(`${label},${h.toFixed(2)},${t[0]},${t[1]},${t[2]},,Michael,,`); left-=h}
+  }
+  return out.join("\n");
+}
+
+load();
+setInterval(()=>{if(!document.hidden) load()},Math.max(15,CONFIG.refreshSeconds)*1000);
+</script>
+</body>
+</html>
