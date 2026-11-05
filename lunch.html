@@ -512,7 +512,7 @@ function eatenStatus(){
   $("eatenText").textContent=t;
   $("eaten").hidden=false;
 }
-const REPLIES=["Michael's ratings are final.","The committee has reviewed this appeal. Denied.","Please direct all complaints to the lunch.","This score has been peer reviewed by Michael.","All appeals must be submitted in the form of a sandwich.","This incident has been added to the permanent lunch record."];
+const REPLIES=["Michael's ratings are final.","The committee has reviewed this appeal. Denied.","Please direct all complaints to the cook.","This score has been peer reviewed by Michael.","All appeals must be submitted in the form of a sandwich.","This incident has been added to the permanent lunch record."];
 let replyAt=0;
 function argueBack(e,btn){
   const line=REPLIES[replyAt++%REPLIES.length];
