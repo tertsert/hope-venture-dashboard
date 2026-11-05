@@ -424,7 +424,7 @@ function calendar(rows){
   return `<section aria-labelledby="h-cal"><h2 id="h-cal">Every day so far</h2><p class="sub">Darker days have more hours. Select a day to see what you worked on.</p>
     <div class="heat-scroll"><div class="heat" style="grid-template-columns:2.6em repeat(${nWeeks},minmax(var(--c),1fr));min-width:calc(2.6em + ${nWeeks}*(var(--c) + 4px));max-width:calc(2.6em + ${nWeeks}*48px)">${html}</div></div>
     <div class="legend"><span>Hours:</span>${key}</div>
-    <div class="day" <h2 id="h-cal">Every day so far</h2><paria-live="polite"><h3>${DAY[fromKey(state.day).getDay()]}, ${nice(state.day)}: ${esc(hrs(sel.hours))}</h3><ul>${list}</ul></div></section>`;
+    <div class="day" <h2 id="h-cal">Every day so far</h2> aria-live="polite"><h3>${DAY[fromKey(state.day).getDay()]}, ${nice(state.day)}: ${esc(hrs(sel.hours))}</h3><ul>${list}</ul></div></section>`;
 }
 function weekly(rows){
   const m=weekTotals(rows), ks=[...m.keys()].sort(), items=[]; let prev=-1, seen=0;
